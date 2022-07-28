@@ -1,0 +1,13 @@
+name: Cache node modules & install dependencies
+description: An action to first cache node modules (or recover it if already cached) and install dependencies (if needed)
+runs: 
+  using: 'composite'
+  steps:
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: cache-node-modules-${{ hashFiles('yarn.lock') }}
+    - name: Install Dependencies
+      run: yarn install --immutable --immutable-cache --check-cache
+      shell: bash

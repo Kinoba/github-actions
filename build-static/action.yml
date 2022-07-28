@@ -1,5 +1,5 @@
-name: Tests
-description: An action to pass tests (from default test script) on a repository and check for errors
+name: Build static app
+description: An action to build static production app on a repository and check for errors
 inputs:
   packageManager:
     description: 'Package manager name : either yarn or npm'
@@ -10,6 +10,6 @@ runs:
   steps:
     - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
 
-    - name: 🧪 Run tests
-      run: ${{ inputs.packageManager }} test
+    - name: 🚀 Build static production app
+      run: ${{ inputs.packageManager }} build
       shell: bash

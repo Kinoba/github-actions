@@ -1,0 +1,19 @@
+name: Linters
+description: An action to pass linters (ESLint & Stylelint) on a repository and check for warnings and errors
+inputs:
+  packageManager:
+    description: 'Package manager name : either yarn or npm'
+    required: false
+    default: yarn
+runs: 
+  using: composite
+  steps:
+    - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
+
+    - name: 🔬 Run ESLint
+      run: ${{ inputs.packageManager }} run eslint . --ext .js,.jsx --color
+      shell: bash
+
+    - name: 🔬 Run Stylelint
+      run: ${{ inputs.packageManager }} run stylelint . --color
+      shell: bash

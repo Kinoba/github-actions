@@ -1,0 +1,15 @@
+name: Tests
+description: An action to pass tests (from default test script) on a repository and check for errors
+inputs:
+  packageManager:
+    description: 'Package manager name : either yarn or npm'
+    required: false
+    default: yarn
+runs: 
+  using: composite
+  steps:
+    - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
+
+    - name: 🧪 Run Tests
+      run: ${{ inputs.packageManager }} test
+      shell: bash

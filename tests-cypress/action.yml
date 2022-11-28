@@ -1,0 +1,16 @@
+name: Test with Cypress
+description: An action to run Cypress tests (from the default ci:test:cypress script) on a repository and check for errors
+inputs:
+  packageManager:
+    description: 'Package manager name : either yarn or npm'
+    required: false
+    default: yarn
+runs: 
+  using: composite
+  steps:
+    - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
+
+    - name: 🧸 Run Cypress tests
+      uses: cypress-io/github-action@v4
+      with:
+        start: ${{ inputs.packageManager }} start

@@ -17,6 +17,10 @@ runs:
         path: ~/.cache/Cypress
         key: cache-cypress-binary-${{ hashFiles('yarn.lock') }}
 
+    - name: Download Cypress binary
+      run: yarn cypress install
+      shell: bash
+
     - name: 🧸 Run Cypress tests
       uses: cypress-io/github-action@v4
       with:

@@ -14,6 +14,10 @@
 
 >  An action to pass tests (from default test script) on a repository and check for errors
 
+- tests-cypress
+
+>  An action to run Cypress tests (from the default ci:test:cypress script) on a repository and check for errors
+
 - build-static
 
 >  An action to build static production app on a repository and check for errors

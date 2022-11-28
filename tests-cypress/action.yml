@@ -10,6 +10,13 @@ runs:
   steps:
     - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
 
+    - name: 💾 Cache Cypress Binary
+      id: cache-cypress-binary
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/Cypress
+        key: cache-cypress-binary-${{ hashFiles('yarn.lock') }}
+
     - name: 🧸 Run Cypress tests
       uses: cypress-io/github-action@v4
       with:

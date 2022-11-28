@@ -5,6 +5,9 @@ inputs:
     description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
+  baseUrl:
+    description: 'Base URL for Cypress to send request to'
+    required: true
 runs: 
   using: composite
   steps:
@@ -25,3 +28,4 @@ runs:
       uses: cypress-io/github-action@v4
       with:
         start: ${{ inputs.packageManager }} start
+        wait-on: ${{ inputs.baseUrl }}

@@ -8,6 +8,10 @@ inputs:
   baseUrl:
     description: 'Base URL for Cypress to send request to'
     required: true
+  browser:
+    description: 'Browser for Cypress to use'
+    required: false
+    default: chrome
 runs: 
   using: composite
   steps:
@@ -29,3 +33,4 @@ runs:
       with:
         start: ${{ inputs.packageManager }} start
         wait-on: ${{ inputs.baseUrl }}
+        browser: ${{ inputs.browser }}

@@ -29,7 +29,7 @@ runs:
       shell: bash
 
     - name: 🧸 Run Cypress tests
-      uses: cypress-io/github-action@v4
+      uses: cypress-io/github-action@v6
       with:
         start: ${{ inputs.packageManager }} start
         wait-on: ${{ inputs.baseUrl }}

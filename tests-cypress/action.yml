@@ -19,7 +19,7 @@ runs:
 
     - name: 💾 Cache Cypress Binary
       id: cache-cypress-binary
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.cache/Cypress
         key: cache-cypress-binary-${{ hashFiles('yarn.lock') }}

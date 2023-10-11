@@ -2,7 +2,7 @@ name: install-javascript-dependencies
 description: An action to first cache node modules (or recover it if already cached) and install dependencies (if needed)
 inputs:
   packageManager:
-    description: 'Package manager name : either yarn or bun'
+    description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
   yarnVersion:
@@ -38,13 +38,13 @@ runs:
       run: yarn install --immutable --immutable-cache --check-cache
       shell: bash
 
-    - name: Setup Bun.sh
-      if: ${{ inputs.packageManager }} == 'bun'
-      uses: oven-sh/setup-bun@v1
-      with:
-        bun-version: latest
+    # - name: Setup Bun.sh
+    #   if: ${{ inputs.packageManager }} == 'bun'
+    #   uses: oven-sh/setup-bun@v1
+    #   with:
+    #     bun-version: latest
 
-    - name: Install dependencies with Bun
-      if: ${{ inputs.packageManager }} == 'bun'
-      shell: bash
-      run: bun install
+    # - name: Install dependencies with Bun
+    #   if: ${{ inputs.packageManager }} == 'bun'
+    #   shell: bash
+    #   run: bun install

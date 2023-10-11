@@ -2,7 +2,7 @@ name: Tests
 description: An action to pass tests (from default test script) on a repository and check for errors
 inputs:
   packageManager:
-    description: 'Package manager name : either yarn, npm or bun'
+    description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
   yarnVersion:
@@ -12,7 +12,7 @@ inputs:
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@v0.1-beta.1
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@v0.2-beta.1
       with:
         packageManager: ${{ inputs.packageManager }}
         yarnVersion: ${{ inputs.yarnVersion }}

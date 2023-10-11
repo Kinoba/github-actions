@@ -38,7 +38,7 @@ runs:
 
     - name: Install dependencies with Yarn
       if: ${{ inputs.packageManager }} == 'yarn'
-      run: yarn install --immutable --immutable-cache --check-cache
+      run: yarn install --immutable
       shell: bash
 
     # - name: Setup Bun.sh

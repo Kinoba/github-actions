@@ -19,7 +19,7 @@ inputs:
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@feature/yarn-version-and-bun-support
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@v0.1-beta.1
       with:
         packageManager: ${{ inputs.packageManager }}
         yarnVersion: ${{ inputs.yarnVersion }}

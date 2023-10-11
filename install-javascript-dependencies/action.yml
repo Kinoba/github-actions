@@ -17,9 +17,12 @@ runs:
       id: yarn-cache-dir-path
       shell: bash
       run: |
-        if ${{ inputs.yarnVersion }} == 1; then
+        if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
+          echo 'IF'
           echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
         else
+          echo 'ELSE'
+          echo $(yarn config get cacheFolder)
           echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         fi
 

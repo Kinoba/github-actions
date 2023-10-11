@@ -5,10 +5,17 @@ inputs:
     description: 'Package manager name : either yarn, npm or bun'
     required: false
     default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@feature/yarn-version-and-bun-support
+      with:
+        packageManager: ${{ inputs.packageManager }}
+        yarnVersion: ${{ inputs.yarnVersion }}
 
     - name: 🚀 Build static production app
       run: ${{ inputs.packageManager }} run build

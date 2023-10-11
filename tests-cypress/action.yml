@@ -5,6 +5,10 @@ inputs:
     description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
   baseUrl:
     description: 'Base URL for Cypress to send request to'
     required: true
@@ -15,7 +19,10 @@ inputs:
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@feature/yarn-version-and-bun-support
+      with:
+        packageManager: ${{ inputs.packageManager }}
+        yarnVersion: ${{ inputs.yarnVersion }}
 
     - name: 💾 Cache Cypress Binary
       if: ${{ inputs.packageManager }} == 'yarn'

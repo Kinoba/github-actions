@@ -18,11 +18,8 @@ runs:
       shell: bash
       run: |
         if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
-          echo 'IF'
           echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
         else
-          echo 'ELSE'
-          echo $(yarn config get cacheFolder)
           echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
         fi
 
@@ -38,8 +35,13 @@ runs:
 
     - name: Install dependencies with Yarn
       if: ${{ inputs.packageManager }} == 'yarn'
-      run: yarn install --immutable
       shell: bash
+      run: |
+        if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
+          yarn install --frozen-lockfile
+        else
+          yarn install --immutable
+        fi
 
     # - name: Setup Bun.sh
     #   if: ${{ inputs.packageManager }} == 'bun'

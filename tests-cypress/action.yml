@@ -5,6 +5,10 @@ inputs:
     description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
   baseUrl:
     description: 'Base URL for Cypress to send request to'
     required: true
@@ -15,9 +19,13 @@ inputs:
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
+      with:
+        packageManager: ${{ inputs.packageManager }}
+        yarnVersion: ${{ inputs.yarnVersion }}
 
     - name: 💾 Cache Cypress Binary
+      if: ${{ inputs.packageManager }} == 'yarn'
       id: cache-cypress-binary
       uses: actions/cache@v3
       with:
@@ -25,12 +33,12 @@ runs:
         key: cache-cypress-binary-${{ hashFiles('yarn.lock') }}
 
     - name: Download Cypress binary
-      run: yarn cypress install
+      run: ${{ inputs.packageManager }} run cypress install
       shell: bash
 
     - name: 🧸 Run Cypress tests
       uses: cypress-io/github-action@v6
       with:
-        start: ${{ inputs.packageManager }} start
+        start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}

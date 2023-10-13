@@ -5,11 +5,18 @@ inputs:
     description: 'Package manager name : either yarn or npm'
     required: false
     default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
 runs: 
   using: composite
   steps:
-    - uses: Kinoba/kinoba-actions/setup-node-dependencies@main
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
+      with:
+        packageManager: ${{ inputs.packageManager }}
+        yarnVersion: ${{ inputs.yarnVersion }}
 
     - name: 🧪 Run tests
-      run: ${{ inputs.packageManager }} test
+      run: ${{ inputs.packageManager }} run test
       shell: bash

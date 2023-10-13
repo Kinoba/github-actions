@@ -1,0 +1,55 @@
+name: install-javascript-dependencies
+description: An action to first cache node modules (or recover it if already cached) and install dependencies (if needed)
+inputs:
+  packageManager:
+    description: 'Package manager name : either yarn or npm'
+    required: false
+    default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
+runs: 
+  using: composite
+  steps:
+    - name: Get Yarn versions cache directory path
+      if: ${{ inputs.packageManager }} == 'yarn'
+      id: yarn-cache-dir-path
+      shell: bash
+      run: |
+        if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
+          echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        else
+          echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Cache Yarn versions node modules
+      if: ${{ inputs.packageManager }} == 'yarn'
+      uses: actions/cache@v3
+      id: yarn-cache
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies with Yarn
+      if: ${{ inputs.packageManager }} == 'yarn'
+      shell: bash
+      run: |
+        if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
+          yarn install --frozen-lockfile
+        else
+          yarn install --immutable
+        fi
+
+    # - name: Setup Bun.sh
+    #   if: ${{ inputs.packageManager }} == 'bun'
+    #   uses: oven-sh/setup-bun@v1
+    #   with:
+    #     bun-version: latest
+
+    # - name: Install dependencies with Bun
+    #   if: ${{ inputs.packageManager }} == 'bun'
+    #   shell: bash
+    #   run: bun install

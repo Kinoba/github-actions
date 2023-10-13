@@ -2,7 +2,7 @@
 
 ## List
 
-- setup-node-dependencies
+- install-javascript-dependencies
 
 > An action to cache node modules (or recover it if already cached) and install dependencies (if needed)
 

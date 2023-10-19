@@ -19,4 +19,4 @@ runs:
 
     - name: 🧪 Run licenses check
       shell: bash
-      run: ./scripts/check-licenses.sh
+      run: pwd && ls && ./scripts/check-licenses.sh

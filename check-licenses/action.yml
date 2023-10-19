@@ -1,0 +1,22 @@
+name: Check licenses
+description: An action to check if a license is authorized by Kinoba or not.
+inputs:
+  packageManager:
+    description: 'Package manager name : either yarn or npm'
+    required: false
+    default: yarn
+  yarnVersion:
+    description: 'Yarn version number'
+    required: false
+    default: '1'
+runs: 
+  using: composite
+  steps:
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
+      with:
+        packageManager: ${{ inputs.packageManager }}
+        yarnVersion: ${{ inputs.yarnVersion }}
+
+    - name: 🧪 Run licenses check
+      shell: bash
+      run: ./scripts/check-licenses.sh

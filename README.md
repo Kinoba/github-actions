@@ -21,3 +21,7 @@
 - build-static
 
 >  An action to build static production app on a repository and check for errors
+
+- check-licenses
+
+>  An action to check if a license is authorized by Kinoba or not

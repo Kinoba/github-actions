@@ -34,7 +34,7 @@ runs:
     - name: 💾 Cache Cypress Binary
       if: ${{ inputs.packageManager }} == 'yarn'
       id: cache-cypress-binary
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/Cypress
         key: cache-cypress-binary-${{ hashFiles('yarn.lock') }}

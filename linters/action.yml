@@ -1,17 +1,24 @@
 name: Linters
 description: An action to pass linters (ESLint & Stylelint) on a repository and check for warnings and errors
 inputs:
+  nodeVersion:
+    description: "Node version number"
+    required: false
+    default: "18"
   packageManager:
-    description: 'Package manager name : either yarn or npm'
+    description: "Package manager name : either yarn or npm"
     required: false
     default: yarn
   yarnVersion:
-    description: 'Yarn version number'
+    description: "Yarn version number"
     required: false
-    default: '1'
-runs: 
+    default: "1"
+runs:
   using: composite
   steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.nodeVersion }}
     - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
       with:
         packageManager: ${{ inputs.packageManager }}

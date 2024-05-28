@@ -1,24 +1,31 @@
 name: Test with Cypress
 description: An action to run Cypress tests (from the default ci:test:cypress script) on a repository and check for errors
 inputs:
+  nodeVersion:
+    description: "Node version number"
+    required: false
+    default: "18"
   packageManager:
-    description: 'Package manager name : either yarn or npm'
+    description: "Package manager name : either yarn or npm"
     required: false
     default: yarn
   yarnVersion:
-    description: 'Yarn version number'
+    description: "Yarn version number"
     required: false
-    default: '1'
+    default: "1"
   baseUrl:
-    description: 'Base URL for Cypress to send request to'
+    description: "Base URL for Cypress to send request to"
     required: true
   browser:
-    description: 'Browser for Cypress to use'
+    description: "Browser for Cypress to use"
     required: false
     default: chrome
-runs: 
+runs:
   using: composite
   steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.nodeVersion }}
     - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
       with:
         packageManager: ${{ inputs.packageManager }}

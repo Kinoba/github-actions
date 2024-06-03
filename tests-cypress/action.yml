@@ -28,6 +28,7 @@ runs:
         node-version: ${{ inputs.nodeVersion }}
     - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
       with:
+        nodeVersion: ${{ inputs.nodeVersion }}
         packageManager: ${{ inputs.packageManager }}
         yarnVersion: ${{ inputs.yarnVersion }}
 

@@ -1,17 +1,24 @@
 name: install-javascript-dependencies
 description: An action to first cache node modules (or recover it if already cached) and install dependencies (if needed)
 inputs:
+  nodeVersion:
+    description: "Node version number"
+    required: false
+    default: "18"
   packageManager:
-    description: 'Package manager name : either yarn or npm'
+    description: "Package manager name : either yarn or npm"
     required: false
     default: yarn
   yarnVersion:
-    description: 'Yarn version number'
+    description: "Yarn version number"
     required: false
-    default: '1'
-runs: 
+    default: "1"
+runs:
   using: composite
   steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.nodeVersion }}
     - name: Get Yarn versions cache directory path
       if: ${{ inputs.packageManager }} == 'yarn'
       id: yarn-cache-dir-path
@@ -25,7 +32,7 @@ runs:
 
     - name: Cache Yarn versions node modules
       if: ${{ inputs.packageManager }} == 'yarn'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: yarn-cache
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}

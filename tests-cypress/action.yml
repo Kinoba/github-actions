@@ -50,4 +50,9 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
-        command-prefix: ${{ inputs.packageManager == 'yarn' &&  "yarn dlx" || "" }}
+        command-prefix: |
+          if ${{ inputs.packageManager }} == 'yarn'; then
+            yarn dlx
+          else
+            ''
+          fi

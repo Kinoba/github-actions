@@ -43,7 +43,12 @@ runs:
     - name: Install dependencies with Yarn
       if: ${{ inputs.packageManager }} == 'yarn'
       shell: bash
-      run: yarn install --immutable
+      run: |
+        if [[ ${{ inputs.yarnVersion }} == 1 ]]; then
+          yarn install --frozen-lockfile
+        else
+          yarn install --immutable
+        fi
 
     # - name: Setup Bun.sh
     #   if: ${{ inputs.packageManager }} == 'bun'

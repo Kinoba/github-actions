@@ -23,7 +23,7 @@ inputs:
   installCommand:
     description: "Command to install dependencies"
     required: false
-    default: ${{ inputs.packageManager }} install --immutable --immutable-cache
+    default: yarn install --immutable --immutable-cache
 runs:
   using: composite
   steps:
@@ -54,4 +54,4 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
-        install-command: ${{ inputs.installCommand }}
+        install-command: ${{ inputs.packageManager }} ${{ inputs.installCommand }}

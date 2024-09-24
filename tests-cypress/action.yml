@@ -20,10 +20,6 @@ inputs:
     description: "Browser for Cypress to use"
     required: false
     default: chrome
-  installCommand:
-    description: "Command to install dependencies"
-    required: false
-    default: yarn install --immutable --immutable-cache
 runs:
   using: composite
   steps:
@@ -54,4 +50,4 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
-        install-command: ${{ inputs.packageManager }} ${{ inputs.installCommand }}
+        command-prefix: yarn dlx

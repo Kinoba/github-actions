@@ -50,3 +50,4 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
+        command: yarn run --binaries-only cypress run

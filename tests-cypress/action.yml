@@ -5,6 +5,10 @@ inputs:
     description: "Node version number"
     required: false
     default: "18"
+  nodeLinker:
+    description: "Node linker name : either pnp or node-modules"
+    required: false
+    default: node-modules
   packageManager:
     description: "Package manager name : either yarn or npm"
     required: false
@@ -50,4 +54,4 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
-        command: yarn run --binaries-only cypress run
+        command: ${{ inputs.nodeLinker === 'pnp' && 'yarn run --binaries-only cypress run' || 'cypress run' }}

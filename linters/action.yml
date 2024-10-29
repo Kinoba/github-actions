@@ -27,7 +27,7 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.nodeVersion }}
-    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@v0-debug
+    - uses: Kinoba/kinoba-actions/install-javascript-dependencies@main
       with:
         nodeVersion: ${{ inputs.nodeVersion }}
         packageManager: ${{ inputs.packageManager }}

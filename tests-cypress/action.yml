@@ -54,4 +54,4 @@ runs:
         start: ${{ inputs.packageManager }} run start
         wait-on: ${{ inputs.baseUrl }}
         browser: ${{ inputs.browser }}
-        command: ${{ inputs.nodeLinker == 'pnp' && 'yarn run --binaries-only cypress run' || 'cypress run' }}
+        command: ${{ inputs.nodeLinker == 'pnp' && 'yarn run --binaries-only cypress run' || 'yarn run cypress run' }}
